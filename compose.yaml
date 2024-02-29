@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: warpalette-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: war_user
+      POSTGRES_PASSWORD: war_pass
+      POSTGRES_DB: warpalette
+    networks:
+      - war_network
+    ports:
+      - "5432:5432"
+
+  flyway:
+    container_name: warpalatte-flyway
+    image: flyway/flyway
+    depends_on:
+      - db
+    volumes:
+      - ./warpalette-schema:/flyway/sql
+    command: -url=jdbc:postgresql://warpalette-db:5432/warpalette -user=war_user -password=war_pass migrate
+    networks:
+      - war_network
+networks:
+  war_network:
+    driver: bridge
