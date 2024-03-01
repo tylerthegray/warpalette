@@ -3,6 +3,7 @@ package com.warpalette.controller;
 import com.warpalette.entity.User;
 import com.warpalette.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,14 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
+    @PostMapping("/users/{userId}/paints/{paintId}")
+    public void addPaintToUser(Long userId, Long paintId) {
+        userService.addPaintToUser(userId, paintId);
+    }
+
+    @DeleteMapping("/users/{userId}/paints/{paintId}")
+    public void removePaintFromUser(Long userId, Long paintId) {
+        userService.removePaintFromUser(userId, paintId);
+    }
 
 }
