@@ -19,4 +19,5 @@ public class PaintController {
     public List<PaintDTO> getAllByProductLineId(@PathVariable Long productLineId) {
         return paintService.getAllByProductLineId(productLineId);
     }
+
 }

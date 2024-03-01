@@ -38,3 +38,25 @@ create table public.paints
 alter table public.paints
     owner to war_user;
 
+create table public.users
+(
+    id       bigserial
+        primary key,
+    username varchar(255)
+);
+
+alter table public.users
+    owner to war_user;
+
+create table public.user_paints
+(
+    user_id bigint
+        constraint users_paints_users_fk
+            references public.users,
+    paint_id bigint
+        constraint users_paints_paints_fk
+            references public.paints
+);
+
+
+
